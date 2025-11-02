@@ -1,10 +1,10 @@
-# DevOps-Hackathon-Toronto-Team-3
+# ParagonAI | The Null Pointers
 Canada DevOps Community of Practice Hackathon Toronto - Team 3 
 
-Project Name - TBD
+Project Name - ParagonAI | The Null Pointers
 Team Mentor -
 
 Participant Names - 
 
-     Team Lead - 
-     Team Members - Aman Purohit, George Farag, Hassan Elbaytam, phamduya, Siddhrath Lamba
+     Team Lead - George Farag
+     Team Members - Aman Purohit, Hassan Elbaytam, Minh Pham, Siddhrath Lamba
