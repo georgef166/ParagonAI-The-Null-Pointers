@@ -8,4 +8,4 @@ Team Mentor - Kanwarpreet Singh Khurana
 Participant Names - 
 
      Team Lead - George Farag
-     Team Members - Aman Purohit, Hassan Elbaytam, Minh Pham, Siddhrath Lamba
+     Team Members - Aman Purohit, Hassan Elbaytam, Minh Pham, Siddharth Lamba
