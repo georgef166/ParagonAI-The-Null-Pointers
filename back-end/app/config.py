@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     # MongoDB Settings
     MONGODB_URL: str = "mongodb://mongodb:27017"
     MONGODB_DB: str = "paragonai"
+    MONGODB_DB_NAME: Optional[str] = None  # For backward compatibility
     
     # Docker Settings
     DOCKER_REGISTRY: str = "docker.io"

@@ -10,6 +10,9 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - MONGODB_URL=mongodb://root:example@mongodb:27017/paragonai?authSource=admin
       - MONGODB_DB=paragonai
+    volumes:
+      - .:/app
+      - /app/__pycache__
     depends_on:
       mongodb:
         condition: service_healthy

@@ -39,9 +39,28 @@ class LLMService:
         else:
             raise ValueError("No valid LLM provider configured")
     
-    def parse_deployment_prompt(self, prompt: str) -> Dict[str, Any]:
+    def generate_completion(self, prompt: str, system_prompt: str = None, **kwargs) -> str:
+        """Generate a completion using the configured LLM with a custom system prompt"""
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        
+        try:
+            response = self.client.chat.completions.create(
+                model=kwargs.get('model', 'mixtral-8x7b-32768'),
+                messages=messages,
+                temperature=kwargs.get('temperature', 0.7),
+                max_tokens=kwargs.get('max_tokens', 1024)
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            logger.error(f"Error generating completion: {str(e)}")
+            raise
+
+    def parse_deployment_prompt(self, prompt: str, system_prompt: str = None) -> Dict[str, Any]:
         """Parse user prompt to extract deployment requirements"""
-        system_prompt = """You are an expert DevOps assistant. Parse the user's deployment request and extract:
+        default_system_prompt = """You are an expert DevOps assistant. Parse the user's deployment request and extract:
         - agent_type: customer_support, content_writer, or data_analyst
         - cloud_provider: aws, azure, gcp, or onprem
         - scale_requirements: number of replicas, auto-scaling needs
