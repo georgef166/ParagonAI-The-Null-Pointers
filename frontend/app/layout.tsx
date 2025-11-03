@@ -11,7 +11,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'ParagonAI - Deploy GenAI Agents from Prompt to Production',
+  title: 'ParagonAI - Prompt to Production',
   description: 'Dashboard for managing and monitoring GenAI agent deployments',
 }
 

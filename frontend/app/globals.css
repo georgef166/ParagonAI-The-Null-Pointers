@@ -56,7 +56,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-accent to-highlight bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-highlight via-highlight to-text bg-clip-text text-transparent;
   }
 
   .neon-glow-grey {
