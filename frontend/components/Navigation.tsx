@@ -14,13 +14,13 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-[#1F1F1F]">
+      <nav className="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-[#2A2A2A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2 group">
-              <Terminal className="w-6 h-6 text-secondary group-hover:text-accent transition-colors" />
-              <span className="text-xl font-heading font-bold text-secondary group-hover:text-accent transition-colors">
+              <Terminal className="w-6 h-6 text-highlight group-hover:text-accent transition-colors" />
+              <span className="text-xl font-heading font-bold text-highlight group-hover:text-accent transition-colors">
                 ParagonAI
               </span>
             </Link>
