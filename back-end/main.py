@@ -11,7 +11,7 @@ client = OpenAI(
 
 response = client.responses.create(
     input="Explain the importance of fast language models",
-    model="openai/gpt-oss-20b",
+    model="openai/gpt-oss-120b",
 )
 print("Hello World")
 print(response.output_text)
