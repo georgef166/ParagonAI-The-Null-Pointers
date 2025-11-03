@@ -1,0 +1,66 @@
+# FastAPI and web framework
+fastapi==0.120.4
+uvicorn[standard]==0.34.0
+starlette==0.49.3
+
+# Pydantic for data validation
+pydantic==2.10.5
+pydantic-settings==2.7.0
+
+# OpenAI and LLM
+openai==2.6.1
+
+# Template rendering
+Jinja2==3.1.5
+
+# Docker SDK
+docker==7.1.0
+
+# YAML parsing
+PyYAML==6.0.2
+
+# MongoDB
+pymongo==4.15.3
+
+# Environment variables
+python-dotenv==1.2.1
+
+# HTTP client
+httpx==0.28.1
+requests==2.32.5
+
+# Testing
+pytest==8.4.2
+pytest-asyncio==0.24.0
+
+# Utilities
+tenacity==9.1.2
+typing_extensions==4.15.0
+
+# Prometheus
+prometheus-client==0.20.0
+
+# Others
+annotated-doc==0.0.3
+annotated-types==0.7.0
+anyio==4.11.0
+certifi==2025.10.5
+charset-normalizer==3.4.4
+distro==1.9.0
+dnspython==2.8.0
+h11==0.16.0
+httpcore==1.0.9
+idna==3.11
+iniconfig==2.3.0
+jsonpatch==1.33
+jsonpointer==3.0.0
+orjson==3.11.4
+ormsgpack==1.11.0
+packaging==25.0
+pluggy==1.6.0
+requests-toolbelt==1.0.0
+sniffio==1.3.1
+typing-inspection==0.4.2
+urllib3==2.5.0
+xxhash==3.6.0
+zstandard==0.25.0

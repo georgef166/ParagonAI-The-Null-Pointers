@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-primary text-text;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent text-white px-6 py-3 rounded-lg font-semibold
+           transition-all duration-300 hover:shadow-neon-grey
+           hover:scale-105 active:scale-95 uppercase tracking-tight;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-3 rounded-lg font-semibold
+           transition-all duration-300 hover:scale-105 active:scale-95
+           uppercase tracking-tight;
+    /* Grey glow effect */
+    box-shadow: 0 0 12px 2px transparent;
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 0 10px #606060; /* subtle grey hover glow */
+  }
+
+  .card {
+    @apply bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg p-6
+           transition-all duration-300 hover:border-accent/50;
+  }
+
+  .status-healthy {
+    @apply text-healthy;
+  }
+
+  .status-deploying {
+    @apply text-deploying;
+  }
+
+  .status-warning {
+    @apply text-warning;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-highlight via-highlight to-text bg-clip-text text-transparent;
+  }
+
+  .neon-glow-grey {
+    box-shadow: 0 0 10px rgba(96, 96, 96, 0.5), 0 0 20px rgba(96, 96, 96, 0.3);
+  }
+
+}
+
