@@ -47,18 +47,20 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-32 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative overflow-hidden pt-20 pb-32 px-4 sm:px-6 lg:px-8 ">
+        <div className="max-w-9xl mx-auto">
           <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 leading-tight">
-              <span className="text-gradient">
-                Deploy GenAI Agents
-              </span>
+            <h1 className="text-5xl md:text-7xl font-heading mb-6">
+              <span className="text-gray-400">{'{'}</span>
+                <span className="inline-block w-fit max-w-[24ch] text-5xl md:text-6xl text-gradient font-mono truncate">
+                GenAI as a Service
+                </span>
+              <span className="text-gray-400">{'}'}</span>
               <br />
               {/* <span className="text-text">from Prompt to Production</span> */}
-              <div className="flex justify-center mt-6 text-text text-6xl">
+              <div className="flex justify-center mt-6 text-text text-7xl">
                 <BlurText
-                text="from Prompt to Production"
+                text="Prompt to Production"
                 delay={50}
                 animateBy="letters"
                 direction="bottom"
@@ -81,8 +83,8 @@ export default function Home() {
                   <span className="ml-4 text-text/50 text-sm">Terminal</span>
                 </div>
                 <div className="font-mono text-text">
-                  <span className="text-secondary">$</span>{' '}
-                  <span className="text-accent">{terminalText}</span>
+                  <span className="text-gray-400">$</span>{' '}
+                  <span className="text-white">{terminalText}</span>
                   <span className="animate-pulse">|</span>
                 </div>
               </div>
