@@ -26,8 +26,14 @@
 
   .btn-secondary {
     @apply bg-secondary text-white px-6 py-3 rounded-lg font-semibold 
-           transition-all duration-300 hover:shadow-neon-teal 
-           hover:scale-105 active:scale-95 uppercase tracking-tight;
+           transition-all duration-300 hover:scale-105 active:scale-95 
+           uppercase tracking-tight;
+    /* Magenta glow effect */
+    box-shadow: 0 0 12px 2px transparent;
+  }
+  
+  .btn-secondary:hover {
+    box-shadow: 0 0 10px #FF00FF; /* vivid magenta hover glow */
   }
 
   .card {
@@ -57,8 +63,5 @@
     box-shadow: 0 0 10px rgba(124, 58, 237, 0.5), 0 0 20px rgba(124, 58, 237, 0.3);
   }
 
-  .neon-glow-teal {
-    box-shadow: 0 0 10px rgba(20, 184, 166, 0.5), 0 0 20px rgba(20, 184, 166, 0.3);
-  }
 }
 

@@ -13,10 +13,6 @@ export default function Home() {
     'paragon status --all'
   ]
 
-  const handleAnimationComplete = () => {
-    console.log('Animation completed!')
-  }
-
   useEffect(() => {
     let commandIndex = 0
     let charIndex = 0
@@ -66,7 +62,6 @@ export default function Home() {
                 delay={50}
                 animateBy="letters"
                 direction="bottom"
-                onAnimationComplete={handleAnimationComplete}
                 />
               </div>
             </h1>
