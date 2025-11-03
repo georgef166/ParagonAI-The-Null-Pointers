@@ -1,0 +1,88 @@
+[
+  {
+    "name": "code-assistant",
+    "template": "Code Assistant",
+    "model": "OpenAI gpt-4o",
+    "instruction": "You are a coding assistant. Provide correct, optimized code with explanations. Focus on best practices and clean code principles.",
+    "resources": {
+      "cpu": "500m",
+      "memory": "512Mi"
+    },
+    "scaling": {
+      "replicas": 2,
+      "autoscale": true,
+      "min_replicas": 2,
+      "max_replicas": 5,
+      "target_cpu_percentage": 70
+    },
+    "endpoints": [
+      "generate",
+      "debug",
+      "optimize"
+    ],
+    "customEndpoints": [],
+    "env": [],
+    "logging": "info",
+    "cloud": "DigitalOcean",
+    "integrations": {}
+  },
+  {
+    "name": "data-analyst",
+    "template": "Data Analyst",
+    "model": "OpenAI gpt-4o",
+    "instruction": "You are a data analyst. Analyze data, create visualizations, and provide actionable insights.",
+    "resources": {
+      "cpu": "1000m",
+      "memory": "1Gi"
+    },
+    "scaling": {
+      "replicas": 1,
+      "autoscale": false
+    },
+    "endpoints": [
+      "analyze",
+      "visualize",
+      "insights"
+    ],
+    "customEndpoints": [],
+    "env": [
+      {
+        "name": "MAX_DATA_SIZE",
+        "value": "100MB"
+      }
+    ],
+    "logging": "debug",
+    "cloud": "DigitalOcean",
+    "integrations": {}
+  },
+  {
+    "name": "customer-support",
+    "template": "Customer Support",
+    "model": "OpenAI gpt-4o",
+    "instruction": "You are a helpful customer support agent. Be friendly, professional, and solve customer issues efficiently.",
+    "resources": {
+      "cpu": "500m",
+      "memory": "512Mi"
+    },
+    "scaling": {
+      "replicas": 3,
+      "autoscale": true,
+      "min_replicas": 2,
+      "max_replicas": 10,
+      "target_cpu_percentage": 60
+    },
+    "endpoints": [
+      "chat",
+      "ticket",
+      "faq"
+    ],
+    "customEndpoints": [],
+    "env": [],
+    "logging": "info",
+    "cloud": "DigitalOcean",
+    "integrations": {
+      "slack": true,
+      "zendesk": false
+    }
+  }
+]

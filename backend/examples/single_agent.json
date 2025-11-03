@@ -1,0 +1,38 @@
+{
+  "name": "research-assistant",
+  "template": "Research Assistant",
+  "model": "OpenAI gpt-4o",
+  "instruction": "You are a research assistant. Provide accurate, well-researched information with proper citations and sources.",
+  "resources": {
+    "cpu": "500m",
+    "memory": "512Mi"
+  },
+  "scaling": {
+    "replicas": 1,
+    "autoscale": false
+  },
+  "endpoints": [
+    "research",
+    "summarize",
+    "qa"
+  ],
+  "customEndpoints": [
+    "cite-sources"
+  ],
+  "env": [
+    {
+      "name": "SEARCH_ENABLED",
+      "value": "true"
+    },
+    {
+      "name": "MAX_SEARCH_RESULTS",
+      "value": "10"
+    }
+  ],
+  "logging": "info",
+  "cloud": "DigitalOcean",
+  "integrations": {
+    "google_scholar": true,
+    "arxiv": true
+  }
+}

@@ -1,0 +1,69 @@
+digraph GenAIDeployment {
+    rankdir=TB;
+    node [shape=box, style=rounded];
+    
+    // User input
+    user [label="User/Frontend", shape=oval, fillcolor=lightblue, style=filled];
+    config [label="agent.config.json\n{\n  name: 'code-assistant',\n  template: 'Code Assistant',\n  model: 'gpt-4o',\n  ...\n}", shape=note, fillcolor=lightyellow, style=filled];
+    
+    // API Layer
+    api [label="FastAPI Backend\n/deploy endpoint", fillcolor=lightgreen, style=filled];
+    
+    // Services
+    agent_svc [label="Agent Service\n- Validate config\n- Select template", fillcolor=wheat, style=filled];
+    docker_svc [label="Docker Service\n- Generate Dockerfile\n- Build image\n- Push to registry", fillcolor=wheat, style=filled];
+    k8s_svc [label="Kubernetes Service\n- Generate manifests\n- Deploy to cluster", fillcolor=wheat, style=filled];
+    
+    // Infrastructure
+    registry [label="DO Container\nRegistry", shape=cylinder, fillcolor=lightcyan, style=filled];
+    k8s [label="Kubernetes Cluster\n(DigitalOcean)", shape=component, fillcolor=lightcyan, style=filled];
+    
+    // Deployed resources
+    deployment [label="Deployment\n(Pods)", fillcolor=lavender, style=filled];
+    service [label="Service\n(Load Balancer)", fillcolor=lavender, style=filled];
+    ingress [label="Ingress\n(HTTPS)", fillcolor=lavender, style=filled];
+    hpa [label="HPA\n(Auto-scaling)", fillcolor=lavender, style=filled];
+    
+    // Running agent
+    agent [label="Live Agent\nhttps://domain.com/agent-name\n\nEndpoints:\n- /health\n- /generate\n- /debug", shape=oval, fillcolor=lightgreen, style=filled];
+    
+    // OpenAI
+    openai [label="OpenAI API\nGPT-4o", shape=oval, fillcolor=orange, style=filled];
+    
+    // Flow
+    user -> config [label="1. Create"];
+    config -> api [label="2. POST"];
+    api -> agent_svc [label="3. Validate"];
+    agent_svc -> docker_svc [label="4. Build"];
+    docker_svc -> registry [label="5. Push"];
+    docker_svc -> k8s_svc [label="6. Deploy"];
+    k8s_svc -> k8s [label="7. Apply manifests"];
+    k8s -> deployment;
+    k8s -> service;
+    k8s -> ingress;
+    k8s -> hpa;
+    deployment -> agent [label="8. Running"];
+    service -> agent;
+    ingress -> agent;
+    agent -> openai [label="9. LLM calls"];
+    agent -> user [label="10. Responses"];
+    
+    // Grouping
+    subgraph cluster_backend {
+        label="Backend Services";
+        style=dashed;
+        api;
+        agent_svc;
+        docker_svc;
+        k8s_svc;
+    }
+    
+    subgraph cluster_k8s_resources {
+        label="K8s Resources";
+        style=dashed;
+        deployment;
+        service;
+        ingress;
+        hpa;
+    }
+}

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ name }}
+  namespace: {{ namespace }}
+  labels:
+    app: {{ name }}
+spec:
+  replicas: {{ replicas }}
+  selector:
+    matchLabels:
+      app: {{ name }}
+  template:
+    metadata:
+      labels:
+        app: {{ name }}
+    spec:
+      containers:
+        - name: {{ name }}
+          image: {{ image }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            {% for p in ports %}
+            - name: {{ p.name }}
+              containerPort: {{ p.containerPort }}
+            {% endfor %}
+          env:
+            {% for e in env %}
+            - name: "{{ e.name }}"
+              value: "{{ e.value }}"
+            {% endfor %}
+          resources:
+            requests:
+              cpu: "{{ resources.cpu }}"
+              memory: "{{ resources.memory }}"
+            limits:
+              cpu: "{{ resources.cpu }}"
+              memory: "{{ resources.memory }}"
