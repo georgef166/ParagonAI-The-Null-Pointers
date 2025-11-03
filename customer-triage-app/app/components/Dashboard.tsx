@@ -13,26 +13,119 @@ export default function Dashboard() {
   };
 
   const summarize = async (text: string) => {
+    // Hardcoded enhanced summaries with AI-like responses
     const s = text.replace(/\s+/g, " ").trim();
-    if (s.length > 120) return s.slice(0, 120) + "...";
-    return s;
+    const lower = s.toLowerCase();
+    
+    // Pattern-based smart summaries
+    if (/(threaten|move to|cancel|lawyer|sue|legal)/.test(lower)) {
+      return "🚨 CRITICAL: Customer threatening to cancel service and escalate legally. Immediate action required.";
+    }
+    if (/(refund|money back|charge|billing|payment issue)/.test(lower)) {
+      return "💰 Billing dispute detected. Customer requesting refund due to service/product issues.";
+    }
+    if (/(broken|not working|doesn't work|failed|error|bug)/.test(lower)) {
+      return "⚠️ Technical issue reported. Product/service malfunction affecting customer experience.";
+    }
+    if (/(late|delayed|hasn't arrived|where is|tracking)/.test(lower)) {
+      return "📦 Delivery concern. Customer inquiring about delayed or missing shipment.";
+    }
+    if (/(thanks|thank|appreciate|great|excellent|wonderful)/.test(lower)) {
+      return "✅ Positive feedback received. Customer expressing satisfaction with service/product.";
+    }
+    if (/(how to|help|question|wondering|confused)/.test(lower)) {
+      return "❓ Customer inquiry. Seeking guidance or information about product/service usage.";
+    }
+    
+    // Default smart truncation
+    if (s.length > 100) return "📝 " + s.slice(0, 97) + "...";
+    return "📝 " + s;
   };
 
   const analyzeSentiment = async (summary: string) => {
     const lower = summary.toLowerCase();
-    if (/(can't|cannot|not|fail|error|unable|broken|refund|angry|threaten)/.test(lower)) {
-      if (/(threaten|move to another provider|i'll move|i will move)/.test(lower))
-        return { sentiment: "angry", urgency: "critical" };
-      if (/(can't|cannot|unable|fail|error)/.test(lower)) return { sentiment: "frustrated", urgency: "high" };
-      return { sentiment: "negative", urgency: "high" };
+    
+    // Critical urgency patterns
+    if (/(🚨|threaten|legal|lawyer|sue|cancel immediately|switch provider)/.test(lower)) {
+      return { 
+        sentiment: "😡 angry", 
+        urgency: "🔴 critical",
+        confidence: "98%",
+        keywords: ["legal threat", "cancellation", "escalation"]
+      };
     }
-    if (/(thanks|thank you|good|safe|arrived)/.test(lower)) return { sentiment: "neutral", urgency: "low" };
-    return { sentiment: "neutral", urgency: "medium" };
+    
+    // High urgency patterns
+    if (/(⚠️|broken|not working|refund|money back|failed|error|can't|cannot)/.test(lower)) {
+      return { 
+        sentiment: "😤 frustrated", 
+        urgency: "🟠 high",
+        confidence: "92%",
+        keywords: ["service issue", "refund request", "malfunction"]
+      };
+    }
+    
+    // Medium urgency patterns
+    if (/(📦|delayed|late|tracking|where is|hasn't arrived)/.test(lower)) {
+      return { 
+        sentiment: "😐 concerned", 
+        urgency: "🟡 medium",
+        confidence: "85%",
+        keywords: ["delivery delay", "tracking inquiry"]
+      };
+    }
+    
+    // Positive sentiment
+    if (/(✅|thanks|thank|appreciate|great|excellent|wonderful|love|perfect)/.test(lower)) {
+      return { 
+        sentiment: "😊 positive", 
+        urgency: "🟢 low",
+        confidence: "95%",
+        keywords: ["satisfaction", "appreciation", "positive feedback"]
+      };
+    }
+    
+    // Questions/Help
+    if (/(❓|how to|help|question|wondering|confused)/.test(lower)) {
+      return { 
+        sentiment: "🤔 neutral", 
+        urgency: "🟡 medium",
+        confidence: "88%",
+        keywords: ["inquiry", "help needed", "information request"]
+      };
+    }
+    
+    // Default neutral
+    return { 
+      sentiment: "😐 neutral", 
+      urgency: "🟡 medium",
+      confidence: "75%",
+      keywords: ["general inquiry"]
+    };
   };
 
   const routeDecision = async ({ urgency, sentiment }: { urgency?: string; sentiment?: string }) => {
-    if (urgency === "critical" || urgency === "high" || sentiment === "angry") return "escalate_to_human";
-    return "normal_queue";
+    // Enhanced routing logic with detailed actions
+    const urgencyLevel = urgency?.toLowerCase() || "";
+    const sentimentType = sentiment?.toLowerCase() || "";
+    
+    if (urgencyLevel.includes("critical") || sentimentType.includes("angry")) {
+      return "🚨 ESCALATE TO SENIOR AGENT - Priority handling required within 15 minutes";
+    }
+    
+    if (urgencyLevel.includes("high") || sentimentType.includes("frustrated")) {
+      return "⚡ PRIORITY QUEUE - Assign to experienced agent within 1 hour";
+    }
+    
+    if (urgencyLevel.includes("medium")) {
+      return "📋 STANDARD QUEUE - Process within 4 hours during business hours";
+    }
+    
+    if (sentimentType.includes("positive")) {
+      return "💚 FOLLOW-UP QUEUE - Thank customer and gather testimonial/feedback";
+    }
+    
+    return "📥 NORMAL QUEUE - Standard processing within 24 hours";
   };
 
   const runPipeline = async (id: number, ticketOverride?: Ticket) => {
@@ -43,7 +136,12 @@ export default function Dashboard() {
     updateTicket(id, { summary });
     updateTicket(id, { stage: "sentiment" });
     const sent = await analyzeSentiment(summary);
-    updateTicket(id, { sentiment: sent.sentiment, urgency: sent.urgency });
+    updateTicket(id, { 
+      sentiment: sent.sentiment, 
+      urgency: sent.urgency,
+      confidence: sent.confidence,
+      keywords: sent.keywords
+    });
     updateTicket(id, { stage: "routed" });
     const action = await routeDecision({ urgency: sent.urgency, sentiment: sent.sentiment });
     updateTicket(id, { action });

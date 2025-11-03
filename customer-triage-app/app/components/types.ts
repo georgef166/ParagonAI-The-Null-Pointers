@@ -9,6 +9,8 @@ export type Ticket = {
 	action?: string;
 	stage: Stage;
 	createdAt?: string;
+	confidence?: string;
+	keywords?: string[];
 };
 
 // Read endpoints from environment so they can point to deployed agents.

@@ -25,17 +25,32 @@ export default function TicketList({ tickets, onRun }: Props) {
 
 	return (
 		<div className="space-y-6">
-			{tickets.map((t) => (
+			{tickets.map((t) => {
+				const isCritical = t.action?.includes('ESCALATE') || t.action?.includes('CRITICAL');
+				const isPriority = t.action?.includes('PRIORITY');
+				const isPositive = t.action?.includes('FOLLOW-UP') || t.action?.includes('💚');
+				
+				return (
 				<div
 					key={t.id}
 					className={`relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl shadow-2xl border-2 transition-all duration-300 hover:shadow-amber-500/20 ${
-						t.action === "escalate_to_human" 
-							? "border-amber-500/60 shadow-amber-500/30" 
+						isCritical
+							? "border-red-500/60 shadow-red-500/30" 
+							: isPriority
+							? "border-amber-500/60 shadow-amber-500/30"
+							: isPositive
+							? "border-green-500/60 shadow-green-500/30"
 							: "border-gray-700/50 hover:border-gray-600"
 					}`}
 				>
-					{t.action === "escalate_to_human" && (
+					{isCritical && (
+						<div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-red-500/10 to-transparent rounded-full blur-3xl"></div>
+					)}
+					{isPriority && (
 						<div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-amber-500/10 to-transparent rounded-full blur-3xl"></div>
+					)}
+					{isPositive && (
+						<div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-green-500/10 to-transparent rounded-full blur-3xl"></div>
 					)}
 					
 					<div className="relative p-8">
@@ -50,12 +65,26 @@ export default function TicketList({ tickets, onRun }: Props) {
 								</div>
 							</div>
 							<div className="flex items-center gap-3">
-								{t.action === "escalate_to_human" ? (
+								{isCritical ? (
+									<span className="px-4 py-2 text-sm font-black rounded-xl bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/50 flex items-center gap-2">
+										<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+											<path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+										</svg>
+										CRITICAL
+									</span>
+								) : isPriority ? (
 									<span className="px-4 py-2 text-sm font-black rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 text-black shadow-lg shadow-amber-500/50 flex items-center gap-2">
 										<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
 											<path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
 										</svg>
-										ESCALATE
+										PRIORITY
+									</span>
+								) : isPositive ? (
+									<span className="px-4 py-2 text-sm font-black rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg shadow-green-500/50 flex items-center gap-2">
+										<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+											<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+										</svg>
+										POSITIVE
 									</span>
 								) : t.action ? (
 									<span className="px-4 py-2 text-sm font-black rounded-xl bg-gray-700/80 text-white shadow-lg flex items-center gap-2">
@@ -100,7 +129,8 @@ export default function TicketList({ tickets, onRun }: Props) {
 						</div>
 					</div>
 				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 }

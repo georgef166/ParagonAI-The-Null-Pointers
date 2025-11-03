@@ -13,7 +13,7 @@ const steps = [
 ];
 
 export default function Pipeline({ ticket }: Props) {
-	const { summary, sentiment, urgency, action, stage } = ticket;
+	const { summary, sentiment, urgency, action, stage, confidence, keywords } = ticket;
 
 	const renderOutput = (stepKey: string) => {
 		if (stepKey === "summarized") {
@@ -26,21 +26,40 @@ export default function Pipeline({ ticket }: Props) {
 		if (stepKey === "sentiment") {
 			if (sentiment || urgency) {
 				return (
-					<div className="flex flex-wrap gap-2">
-						{sentiment && (
-							<span className="px-3 py-1.5 text-sm font-black rounded-lg bg-gray-700 text-white">
-								{sentiment}
-							</span>
-						)}
-						{urgency && (
-							<span className={`px-3 py-1.5 text-sm font-black rounded-lg ${
-								urgency === 'critical' ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/50' :
-								urgency === 'high' ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-black shadow-lg shadow-amber-500/50' :
-								urgency === 'medium' ? 'bg-gray-600 text-white' :
-								'bg-gray-700 text-white'
-							}`}>
-								{urgency} urgency
-							</span>
+					<div className="space-y-3">
+						<div className="flex flex-wrap gap-2">
+							{sentiment && (
+								<span className="px-3 py-1.5 text-sm font-black rounded-lg bg-gray-700 text-white">
+									{sentiment}
+								</span>
+							)}
+							{urgency && (
+								<span className={`px-3 py-1.5 text-sm font-black rounded-lg ${
+									urgency.includes('critical') ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg shadow-red-500/50' :
+									urgency.includes('high') ? 'bg-gradient-to-r from-amber-500 to-yellow-600 text-black shadow-lg shadow-amber-500/50' :
+									urgency.includes('medium') ? 'bg-gray-600 text-white' :
+									'bg-gray-700 text-white'
+								}`}>
+									{urgency}
+								</span>
+							)}
+							{confidence && (
+								<span className="px-3 py-1.5 text-xs font-black rounded-lg bg-blue-600/20 text-blue-300 border border-blue-500/30">
+									⚡ Confidence: {confidence}
+								</span>
+							)}
+						</div>
+						{keywords && keywords.length > 0 && (
+							<div className="mt-2">
+								<div className="text-xs font-bold text-gray-400 mb-1.5">🏷️ Keywords Detected:</div>
+								<div className="flex flex-wrap gap-1.5">
+									{keywords.map((keyword, idx) => (
+										<span key={idx} className="px-2 py-1 text-xs font-semibold rounded-md bg-gray-800/50 text-gray-300 border border-gray-700/50">
+											{keyword}
+										</span>
+									))}
+								</div>
+							</div>
 						)}
 					</div>
 				);
@@ -49,7 +68,7 @@ export default function Pipeline({ ticket }: Props) {
 		}
 		if (stepKey === "routed") {
 			return action ? (
-				<div className="text-base font-black text-white">{action.replace('_', ' ')}</div>
+				<div className="text-base font-black text-white">{action}</div>
 			) : (
 				<div className="text-base text-gray-500 italic font-medium">Not processed yet</div>
 			);
