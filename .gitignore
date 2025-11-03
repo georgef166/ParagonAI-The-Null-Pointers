@@ -3,3 +3,4 @@ CLAUDE.md
 .specify/
 specs
 .venv
+.DS_Store
