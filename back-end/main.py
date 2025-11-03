@@ -1,5 +1,5 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from app.routers.generation import router as generation_router
 from app.routers.deployments import router as deployments_router
 from app.routers.agents import router as agents_router
@@ -9,6 +9,32 @@ import threading
 import logging
 
 app = FastAPI()
+
+@app.get("/")
+async def root():
+    return {"message": "ParagonAI Agent Deployment Platform is running"}
+
+@app.get("/test")
+async def test():
+    return {"message": "Test endpoint is working!"}
+
+# Middleware for logging requests
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger = logging.getLogger(__name__)
+    logger.info(f"Incoming request: {request.method} {request.url}")
+    logger.info(f"Headers: {dict(request.headers)}")
+    
+    # Log request body for POST requests
+    if request.method == "POST":
+        body = await request.body()
+        try:
+            logger.info(f"Request body: {body.decode()}")
+        except:
+            logger.info("Could not decode request body")
+    
+    response = await call_next(request)
+    return response
 
 # Include routers
 app.include_router(generation_router)

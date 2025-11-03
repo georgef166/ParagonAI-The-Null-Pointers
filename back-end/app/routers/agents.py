@@ -1,11 +1,12 @@
 # In app/routers/agents.py
-from fastapi import APIRouter, HTTPException, Body
+from fastapi import APIRouter, HTTPException, Body, Request
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
 from app.schemas import AgentTemplate, AgentType, MetricsResponse, AgentDefaultConfig
 from datetime import datetime
 import logging
 from copy import deepcopy
+import json
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/agents", tags=["agents"])
@@ -75,8 +76,10 @@ AGENT_TEMPLATES_DATA = [
     }
 ]
 
-@router.get("/test", include_in_schema=True)
+# Test endpoint to verify the router is working
+@router.get("/test", include_in_schema=True, response_model=dict)
 async def test_endpoint():
+    """Test endpoint to verify the agents router is working."""
     return {"message": "Agents router is working!"}
     
 # Convert to Pydantic models
