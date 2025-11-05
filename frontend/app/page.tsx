@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, Terminal } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import BlurText from '@/components/BlurText'
 
 export default function Home() {
@@ -48,6 +49,18 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-32 px-4 sm:px-6 lg:px-8 ">
+        {/* Top-left award image */}
+        <div aria-hidden="true" className="absolute top-20 left-64 transform -rotate-12 pointer-events-auto select-none animate-pulse">
+          <button onClick={() => window.open("https://www.amanpurohit.com/blog/we-got-the-place-surrounded", "_blank")}>
+          <Image
+            src="/assets/award.png"
+            alt="Winner of DevOps GenAI Hackathon 2025"
+            width={56}
+            height={56}
+            priority
+            className="w-18 h-18 "
+          /></button>
+        </div>
         <div className="max-w-9xl mx-auto">
           <div className="text-center">
             <h1 className="text-5xl md:text-7xl font-heading mb-6">
