@@ -26,7 +26,7 @@ export default function AccountPage() {
               </label>
               <input
                 type="text"
-                defaultValue="John Doe"
+                defaultValue="Elon Musk"
                 className="w-full bg-[#060606] border border-[#1F1F1F] rounded-lg px-4 py-2 text-text focus:outline-none focus:border-accent transition-colors"
               />
             </div>
@@ -36,7 +36,7 @@ export default function AccountPage() {
               </label>
               <input
                 type="email"
-                defaultValue="john.doe@example.com"
+                defaultValue="elon.musk@alien.com"
                 className="w-full bg-[#060606] border border-[#1F1F1F] rounded-lg px-4 py-2 text-text focus:outline-none focus:border-accent transition-colors"
               />
             </div>
@@ -46,7 +46,7 @@ export default function AccountPage() {
               </label>
               <input
                 type="text"
-                defaultValue="Acme Corp"
+                defaultValue="Area 51 Inc."
                 className="w-full bg-[#060606] border border-[#1F1F1F] rounded-lg px-4 py-2 text-text focus:outline-none focus:border-accent transition-colors"
               />
             </div>
@@ -170,7 +170,7 @@ export default function AccountPage() {
             </button>
           </div>
           <p className="text-xs text-text/50 mt-4">
-            Note: Light theme is coming soon. Currently using Neo-Synth dark theme.
+            Note: Light theme is coming soon.
           </p>
         </div>
 
