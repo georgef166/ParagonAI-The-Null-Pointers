@@ -13,7 +13,10 @@ Canada DevOps Community of Practice Hackathon Toronto - Team 3
 
 **Video Demo**
 
-https://github.com/user-attachments/assets/11a62b56-b494-436d-b754-8c50b6a3b9a1
+![Untitled design (1)](https://github.com/user-attachments/assets/db09c0b0-f0c0-45c2-a036-e671e70de692)
+![Untitled design (2)](https://github.com/user-attachments/assets/0efa9a5a-c7f4-46e8-bde1-1ffd8894703d)
+
+
 
 ---
 # Paragon AI – {GenAI as a Service} (CLI)
