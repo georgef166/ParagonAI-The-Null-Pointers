@@ -4,16 +4,11 @@
 This project placed **2nd** in the *GTA Canada DevOps CoP GenAI Hackathon*.
 ---
 ### ParagonAI | The Null Pointers
-Canada DevOps Community of Practice Hackathon Toronto - Team 3 
+Canada DevOps Community of Practice Hackathon Toronto - Team 3
 
-Project Name - ParagonAI | The Null Pointers
+**Project Name** - ParagonAI | The Null Pointers
 
-Team Mentor - Kanwarpreet Singh Khurana
-
-Participant Names - 
-
-     Team Lead - George Farag
-     Team Members - Aman Purohit, Hassan Elbaytam, Minh Pham, Siddharth Lamba
+**Team Members** - Aman Purohit, George Farag, Hassan Elbaytam, Minh Pham, Siddharth Lamba
 
 
 **Video Demo**
