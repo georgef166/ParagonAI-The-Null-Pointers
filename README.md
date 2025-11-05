@@ -24,4 +24,7 @@ cp .env.example .env
 
 add groq api key to newly created .env file
 
+**Video Demo**
+
+https://github.com/user-attachments/assets/11a62b56-b494-436d-b754-8c50b6a3b9a1
 
