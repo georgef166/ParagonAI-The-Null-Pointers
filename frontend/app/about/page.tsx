@@ -92,7 +92,7 @@ export default function AboutPage() {
               { name: 'Aman Purohit', github: 'https://github.com/purohitamann', linkedin: 'https://www.linkedin.com/in/amanhiranpurohit/' },
               { name: 'George Farag', github: 'https://github.com/georgef166', linkedin: 'https://www.linkedin.com/in/gfarag/' },
               { name: 'Hassan Elbaytam', github: 'https://github.com/HMBaytam', linkedin: 'https://www.linkedin.com/in/hmbaytam/' },
-              { name: 'Minh Pham', github: 'https://github.com/phamduyanminh', linkedin: 'https://www.linkedin.com/in/minhpham161204/' }
+              { name: 'Minh Pham', github: 'https://github.com/phamduyanminh', linkedin: 'https://www.linkedin.com/in/minhp3120/' }
             ].map((member) => (
               <div
                 key={member.github}
